@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paasbunny Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: #87CEEB;
+            margin: 0 auto;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .mobile-buttons {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .mobile-buttons {
+                display: block;
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+            }
+            .mobile-buttons button {
+                padding: 15px;
+                font-size: 18px;
+                margin: 5px;
+                background-color: #ffcc00;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+        }
+        #restartButton {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+            z-index: 10;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        #popup button {
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #popup-footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #fff;
+        }
+        #popup-footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="score">Score: 0</div>
+
+    <div class="mobile-buttons">
+        <button id="leftButton">Left</button>
+        <button id="rightButton">Right</button>
+    </div>
+
+    <button id="restartButton" onclick="restartGame()">Restart Game</button>
+
+    <div id="popup">
+        <h2>How to Play</h2>
+        <p>Use the arrow keys to move left and right.</p>
+        <button onclick="closePopup()">Start Game</button>
+        <div id="popup-footer">
+            <p>Abonneer op <a href="https://www.youtube.com/channel/OOhpaaarjan" target="_blank">OOHPA ARJAN</a></p>
+            <p>Powered by <a href="https://osmocore.nl" target="_blank">OsmoCore</a></p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const restartButton = document.getElementById('restartButton');
+        const popup = document.getElementById('popup');
+        
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        let score = 0;
+        let gameInterval;
+        let bunnyX = width / 2 - 50;
+        let bunnyY = height - 150;
+        let bunnySpeed = 5; // Constante snelheid voor de Paashaas
+        let gravity = 0;
+        let velocityY = 0;
+        let isMovingLeft = false;
+        let isMovingRight = false;
+        let fallSpeed = 1; // Begint met een lage snelheid voor de objecten
+        let difficultyInterval;
+
+        const eggs = [];
+        const obstacles = [];
+
+        const bunnyImage = new Image();
+        bunnyImage.src = 'paashaas.png'; // Gebruik je eigen afbeelding
+        const eggImage = new Image();
+        eggImage.src = 'paasei.png'; // Gebruik je eigen afbeelding
+
+        function startGame() {
+            score = 0;
+            bunnyY = height - 150;
+            velocityY = 0;
+            fallSpeed = 1; // Reset de snelheid bij het starten van het spel
+            eggs.length = 0;
+            obstacles.length = 0;
+            restartButton.style.display = 'none';
+            gameInterval = requestAnimationFrame(gameLoop);
+            difficultyInterval = setInterval(increaseDifficulty, 10000); // Verhoog de moeilijkheid elke 10 seconden
+            popup.style.display = 'none';
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, width, height);
+            updateBunny();
+            updateEggs();
+            updateObstacles();
+            detectCollisions();
+            updateScore();
+            gameInterval = requestAnimationFrame(gameLoop);
+        }
+
+        function updateBunny() {
+            if (isMovingLeft && bunnyX > 0) {
+                bunnyX -= bunnySpeed;
+            }
+            if (isMovingRight && bunnyX < width - 100) {
+                bunnyX += bunnySpeed;
+            }
+
+            ctx.drawImage(bunnyImage, bunnyX, bunnyY, 100, 100); // Vergroot de Paashaas afbeelding
+        }
+
+        function updateEggs() {
+            if (Math.random() < 0.03) { // Verhoog de kans om een ei te laten vallen
+                let eggX = Math.random() * width;
+                let eggY = -50;
+                eggs.push({ x: eggX, y: eggY });
+            }
+
+            eggs.forEach((egg, index) => {
+                egg.y += fallSpeed; // Gebruik de veranderende snelheid voor eieren
+                ctx.drawImage(eggImage, egg.x, egg.y, 50, 50);
+
+                if (egg.y > height) {
+                    eggs.splice(index, 1);
+                }
+            });
+        }
+
+        function updateObstacles() {
+            if (Math.random() < 0.05) { // Verhoog de kans om obstakels te laten vallen
+                let obstacleX = Math.random() * width;
+                let obstacleY = -50;
+                obstacles.push({ x: obstacleX, y: obstacleY });
+            }
+
+            obstacles.forEach((obstacle, index) => {
+                obstacle.y += fallSpeed; // Gebruik de veranderende snelheid voor obstakels
+                ctx.fillStyle = '#A52A2A';
+                ctx.fillRect(obstacle.x, obstacle.y, 50, 50);
+
+                if (obstacle.y > height) {
+                    obstacles.splice(index, 1);
+                }
+            });
+        }
+
+        function detectCollisions() {
+            eggs.forEach((egg, eggIndex) => {
+                if (egg.x + 50 > bunnyX && egg.x < bunnyX + 50 && egg.y + 50 > bunnyY && egg.y < bunnyY + 50) {
+                    score++;
+                    eggs.splice(eggIndex, 1);
+                }
+            });
+
+            obstacles.forEach((obstacle, obstacleIndex) => {
+                if (obstacle.x + 50 > bunnyX && obstacle.x < bunnyX + 50 && obstacle.y + 50 > bunnyY && obstacle.y < bunnyY + 50) {
+                    gameOver();
+                }
+            });
+        }
+
+        function updateScore() {
+            scoreElement.innerText = 'Score: ' + score;
+        }
+
+        function increaseDifficulty() {
+            fallSpeed += 1; // Verhoog de snelheid van eieren en obstakels
+        }
+
+        function gameOver() {
+            cancelAnimationFrame(gameInterval);
+            clearInterval(difficultyInterval); // Stop de snelheid verhoging bij game over
+            restartButton.style.display = 'block';
+        }
+
+        function restartGame() {
+            clearInterval(difficultyInterval); // Stop de vorige moeilijkheid interval
+            startGame();
+        }
+
+        function closePopup() {
+            startGame();
+        }
+
+        // Keyboard input
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                isMovingLeft = true;
+            } else if (event.key === 'ArrowRight') {
+                isMovingRight = true;
+            }
+        });
+
+        window.addEventListener('keyup', (event) => {
+            if (event.key === 'ArrowLeft') {
+                isMovingLeft = false;
+            } else if (event.key === 'ArrowRight') {
+                isMovingRight = false;
+            }
+        });
+
+        // Mobile button controls
+        document.getElementById('leftButton').addEventListener('touchstart', () => isMovingLeft = true);
+        document.getElementById('leftButton').addEventListener('touchend', () => isMovingLeft = false);
+        document.getElementById('rightButton').addEventListener('touchstart', () => isMovingRight = true);
+        document.getElementById('rightButton').addEventListener('touchend', () => isMovingRight = false);
+
+        window.onload = function() {
+            popup.style.display = 'block';
+        };
+    </script>
+</body>
+</html>
