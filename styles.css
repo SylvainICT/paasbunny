@@ -1,0 +1,221 @@
+:root {
+    --primary: #d4af37; /* Gouden kleur */
+    --secondary: #1e2a38; /* Donkerblauw */
+    --background: #0e1a2b; /* Donkerblauw */
+    --accent: #f1f1f1; /* Lichtkleurig accent */
+    --text: #f1f1f1;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --highlight: #4CAF50; /* Groene highlight voor knoppen */
+    --gradient-start: #1e2a38; /* Start kleur voor de gradient */
+    --gradient-end: #d4af37; /* Eind kleur voor de gradient */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: 80px; /* Voeg ruimte boven toe vanwege de vaste header */
+  }
+  
+  header {
+    background-color: var(--secondary);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  header .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  header .logo {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  header .logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .menu-toggle {
+    width: 40px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 1100;
+  }
+  
+  .menu-toggle span {
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: var(--primary);
+    left: 0;
+    transition: 0.3s;
+  }
+  
+  .menu-toggle span:nth-child(1) { top: 0; }
+  .menu-toggle span:nth-child(2) { top: 12px; }
+  .menu-toggle span:nth-child(3) { top: 24px; }
+  
+  .menu-toggle.hide {
+    display: none;
+  }
+  
+  nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 250px;
+    background-color: var(--secondary);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -2px 0px 10px var(--shadow);
+    padding-top: 80px;
+  }
+  
+  nav.open {
+    transform: translateX(0);
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: var(--accent);
+    padding: 1rem 2rem;
+    display: block;
+    transition: background 0.3s, transform 0.3s ease;
+  }
+  
+  nav a:hover {
+    background-color: var(--primary);
+    color: #000;
+    transform: translateX(10px);
+  }
+  
+  nav .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--secondary);
+    color: var(--accent);
+    box-shadow: 0 -2px 4px var(--shadow);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .content {
+    padding: 2rem;
+    text-align: center;
+    margin-top: 80px;
+  }
+  
+  .content h2 {
+    font-size: 2rem;
+    color: var(--primary);
+  }
+  
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-logo .logo {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .text-box, .discord-box {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    padding: 40px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow);
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 1s ease-in-out;
+  }
+  
+  .text-box.fade-in, .discord-box.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .text-box h3, .discord-box h3 {
+    color: var(--accent);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .text-box p, .discord-box p {
+    color: var(--accent);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  
+  .discord-invite-btn {
+    background-color: var(--highlight);
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .discord-invite-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-5px);
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .logo-text {
+      font-size: 1.2rem;
+    }
+  }

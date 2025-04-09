@@ -1,245 +1,65 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paasbunny </title>
-    <link rel="icon" href="image-4.webp" type="image/png">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #9146FF, #FF0000);
-            color: white;
-            text-align: center;
-            overflow-x: hidden;
-        }
-        header {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 15px;
-        }
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2em;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            color: #ffcc00;
-        }
-        .content {
-            padding: 50px;
-        }
-        section {
-            margin: 60px auto;
-            max-width: 900px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        section:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-        .show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .social-links a {
-            margin: 10px;
-            font-size: 1.5em;
-            color: white;
-            text-decoration: none;
-            position: relative;
-            transition: 0.3s;
-            padding: 15px 25px;
-            border-radius: 50px;
-            background: rgba(0, 0, 0, 0.6);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        .social-links a:hover {
-            color: #ffcc00;
-            background: rgba(0, 0, 0, 0.8);
-            transform: scale(1.05);
-        }
-        .logo img {
-            width: 150px;
-            border-radius: 10px;
-            margin: 20px;
-        }
-        .moderator-list {
-            text-align: left;
-            padding-left: 20px;
-        }
-        .moderator-list ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .moderator-list li {
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .moderator-list img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .moderator-list a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2em;
-            transition: color 0.3s ease;
-        }
-        .moderator-list a:hover {
-            color: #ffcc00;
-        }
-        .text-block {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin: 20px 0;
-            transition: transform 0.3s ease-in-out;
-        }
-        .text-block:hover {
-            transform: scale(1.05);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .social-links a {
-                padding: 10px 20px;
-                font-size: 1.2em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .social-links a {
-                padding: 10px 15px;
-                font-size: 1em;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaasBunny - Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="image-4.webp" alt="Paasbunny Logo">
-        </div>
-        <h1>Paasbunny </h1>
-        <nav>
-            <a href="#over">Over Mij</a>
-            <a href="#ervaring">Ervaring</a>
-            <a href="#mod">Waar ik al Mod ben</a>
-            <a href="#social">Social Media</a>
-        </nav>
-    </header>
-
-    <div class="content">
-        <section id="over" class="fade-in">
-            <h2>Over Mij</h2>
-            <div class="text-block">
-                <p>Ik ben een ervaren moderator die streamers helpt met een veilige en georganiseerde chat. Als mod heb ik ervaring met het beheren van chats, het ondersteunen van de community en het handhaven van de regels.</p>
-            </div>
-        </section>
-
-        <section id="ervaring" class="fade-in">
-            <h2>Mijn Ervaring</h2>
-            <div class="text-block">
-                <ul>
-                    <li>Moderator voor verschillende streamers</li>
-                    <li>Ervaren in chatbeheer en community-opbouw</li>
-                    <li>Snel en effectief ongewenste content verwijderen</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="mod" class="fade-in moderator-list">
-            <h2>Waar ik al Mod ben</h2>
-            <div class="text-block">
-                <ul>
-                    <li>
-                        <img src="oohpa arjan.jpeg" alt="Streamer A Logo">
-                        <a href="https://youtube.com/@oohpaarjan" target="_blank">Oohpa arjan</a>
-                    </li>
-                    <li>
-                        <img src="makkelijke.png.jpeg" alt="Streamer B Logo">
-                        <a href="https://www.youtube.com/c/StreamerB" target="_blank">Makkelijke arjan</a>
-                    </li>
-                    <li>
-                        <img src="780adbeb-7947-4577-8ceb-488e17378b5e-profile_image-70x70.png" alt="Streamer C Logo">
-                        <a href="https://www.twitch.tv/ganja045kerkrade" target="_blank">ganja045kerkrade</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="social" class="fade-in">
-            <h2>Volg mij op</h2>
-            <div class="social-links">
-                <a href="https://www.instagram.com/paasbunny" target="_blank" onmouseover="triggerConfetti()">📸 Instagram</a>
-                <a href="https://www.tiktok.com/@paasbunny" target="_blank" onmouseover="triggerConfetti()">🎵 TikTok</a>
-                <a href="https://youtube.com/@paasbunny" target="_blank" onmouseover="triggerConfetti()">▶️ YouTube</a>
-                <a href="https://discord.com/users/paasbunny" target="_blank" onmouseover="triggerConfetti()">💬 Discord</a>
-            </div>
-        </section>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="PaasBunny Logo" class="logo" />
+      <span class="logo-text">PaasBunny</span>
     </div>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav-menu">
+      <div class="close-btn" onclick="toggleMenu()">X</div>
+      <ul>
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="over.html" onclick="toggleMenu()">Over</a></li>
+        <li><a href="discord.html" onclick="toggleMenu()">Discordbeheer</a></li>
+        <li><a href="bots.html" onclick="toggleMenu()">Bots</a></li>
+        <li><a href="login.html" class="login-btn" onclick="toggleMenu()">Inloggen</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const fadeElements = document.querySelectorAll(".fade-in");
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("show");
-                    }
-                });
-            }, { threshold: 0.2 });
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
+  <section class="content">
+    <div class="header-logo">
+    </div>
+    <h2>Welkom bij PaasBunny</h2>
+    <div class="text-box">
+      <h3>Over PaasBunny</h3>
+      <p>Moderator en Discordbeheerder met passie voor community’s en bots. Verken de pagina’s voor meer info of log in op het dashboard.</p>
+    </div>
+    <div class="discord-box">
+      <h3>Voeg de Discord-server toe!</h3>
+      <p>Klik op de onderstaande knop om jezelf uit te nodigen voor mijn Discord-server.</p>
+      <a href="https://discord.gg/9Dd79F84bX" class="discord-invite-btn">Join de Discord!</a>
+    </div>
+  </section>
+  
+  <footer>
+    <p>&copy; 2025 PaasBunny.</p>
+  </footer>
 
-        function triggerConfetti() {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { x: 0.5, y: 0.5 }
-            });
-        }
-    </script>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      const menuButton = document.querySelector('.menu-toggle');
+      menu.classList.toggle('open');
+      menuButton.classList.toggle('hide');
+    }
+
+    // Display the text box with fade-in animation
+    window.onload = function() {
+      document.querySelector('.text-box').classList.add('fade-in');
+      document.querySelector('.discord-box').classList.add('fade-in');
+    };
+  </script>
 </body>
 </html>

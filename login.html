@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inloggen</title>
+  <link rel="stylesheet" href="login.css" />
+  <script defer src="login.js"></script>
+</head>
+<body>
+  <!-- Header met Hamburger Menu -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo" class="logo" />
+      <span class="logo-text">PaasBunny</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Navigatie Menu -->
+  <nav id="navMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="login.html">Inloggen</a></li>
+    </ul>
+  </nav>
+
+  <!-- Login Formulier -->
+  <div class="login-form">
+    <h2>Inloggen</h2>
+    <form action="/dashboard" method="POST">
+      <div class="input-container">
+        <label for="username">Gebruikersnaam</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="input-container">
+        <label for="password">Wachtwoord</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit" class="login-btn">Inloggen</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 PaasBunny</p>
+  </footer>
+</body>
+</html>

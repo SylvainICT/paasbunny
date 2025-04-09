@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaasBunny - Discord Bots</title>
+ 
+  <link rel="stylesheet" href="bots.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="PaasBunny Logo" class="logo" />
+      <span class="logo-text">PaasBunny</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav-menu">
+      <div class="close-btn" onclick="toggleMenu()">X</div>
+      <ul>
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="over.html" onclick="toggleMenu()">Over</a></li>
+        <li><a href="discord.html" onclick="toggleMenu()">Discordbeheer</a></li>
+        <li><a href="bots.html" onclick="toggleMenu()">Bots</a></li>
+        <li><a href="login.html" class="login-btn" onclick="toggleMenu()">Inloggen</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="content">
+    <div class="intro">
+      <h2 class="intro-heading">Onze Discord Bots</h2>
+      <p class="intro-text">Ontdek de verschillende bots die we beheren en voeg ze toe aan je server voor meer functies en gemak.</p>
+    </div>
+
+    <div class="bot-container">
+        <div class="bot-card fade-in left">
+            <h3>Bot 1 - Moderatie Bot</h3>
+            <p>Een krachtige bot voor servermoderatie. Deze bot helpt je met het beheren van je server, het handhaven van regels en het ondersteunen van je community.</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1356214767890464930" target="_blank" class="btn">Voeg de Bot toe</a>
+        </div>
+    
+        <div class="bot-card fade-in right">
+            <h3>Bot 2 - Muziek Bot</h3>
+            <p>De muziek bot die je laat genieten van muziek op je server! Voeg hem toe om muziek af te spelen tijdens je streams of bijeenkomsten.</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=bot2_id&scope=bot" target="_blank" class="btn">in aanmaak</a>
+        </div>
+    
+        <div class="bot-card fade-in left">
+            <h3>Bot 3 - Welkomst Bot</h3>
+            <p>Deze bot verwelkomt nieuwe leden op je server met een persoonlijke boodschap. Maak je server vriendelijker met deze bot.</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1355871330939048168" target="_blank" class="btn">Voeg de Bot toe</a>
+        </div>
+    
+        <div class="bot-card fade-in right">
+            <h3>Bot 4 - Spam Bot</h3>
+            <p>Deze bot helpt je om spam in je server te detecteren en te verwijderen, zodat je server schoon en veilig blijft.</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1359290956343414814" target="_blank" class="btn">Voeg de Bot toe</a>
+        </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PaasBunny.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      const menuButton = document.querySelector('.menu-toggle');
+      menu.classList.toggle('open');
+      menuButton.classList.toggle('hide');
+    }
+
+    window.onload = function() {
+      document.querySelectorAll('.bot-card').forEach(function(card, index) {
+        card.style.animationDelay = `${index * 1}s`; // Voeg vertraging van 1 seconde per bot toe
+        card.classList.add('fade-in-active');
+      });
+    };
+
+    // Fade-In effect voor de bots bij scrollen
+    document.addEventListener('scroll', function() {
+      const botCards = document.querySelectorAll('.bot-card');
+      const scrollPosition = window.scrollY + window.innerHeight;
+
+      botCards.forEach(function(card) {
+        if (card.offsetTop < scrollPosition) {
+          card.classList.add('fade-in-active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

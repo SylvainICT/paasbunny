@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaasBunny - Discord Serverbeheer</title>
+  <link rel="stylesheet" href="discord.css" />
+  <link rel="stylesheet" href="bots.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="PaasBunny Logo" class="logo" />
+      <span class="logo-text">PaasBunny</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav-menu">
+      <div class="close-btn" onclick="toggleMenu()">X</div>
+      <ul>
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="over.html" onclick="toggleMenu()">Over</a></li>
+        <li><a href="discord.html" onclick="toggleMenu()">Discordbeheer</a></li>
+        <li><a href="bots.html" onclick="toggleMenu()">Bots</a></li>
+        <li><a href="login.html" class="login-btn" onclick="toggleMenu()">Inloggen</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="content">
+    <div class="intro">
+     
+      <h2 class="intro-heading">Discord Serverbeheer & Maatwerk</h2>
+      <p class="intro-text">Bij PaasBunny bieden wij op maat gemaakte Discord-servers en professioneel beheer. Of je nu een community, gamingserver, of zakelijke Discord-server wilt, wij zorgen voor alles!</p>
+    </div>
+
+    <div class="services">
+      <h3>Onze Diensten</h3>
+      <p>Wij bieden verschillende diensten aan voor Discord-servers:</p>
+      <ul>
+        <li><strong>Server Configuratie:</strong> We helpen je bij het opzetten van je server, inclusief kanalen, rollen en permissies.</li>
+        <li><strong>Automatisering:</strong> Gebruik bots en automatiseringen om je server efficiënt te beheren en te modereren.</li>
+        <li><strong>Server Beheer:</strong> Wij nemen het dagelijkse beheer van je server over, inclusief moderatie en gebruikersbeheer.</li>
+        <li><strong>Custom Bots:</strong> We ontwikkelen bots die passen bij jouw serverbehoeften, van moderatie tot interactieve bots.</li>
+      </ul>
+    </div>
+
+    <div class="examples">
+      <h3>Voorbeelden van Servers die Wij Beheren</h3>
+      <p>Hier zijn een paar voorbeelden van Discord-servers die we hebben geconfigureerd en beheerd:</p>
+      <div class="server-example fade-in">
+        <h4>Community Server</h4>
+        <p>Een levendige community waar mensen dagelijks met elkaar kunnen chatten, evenementen organiseren, en meer!</p>
+        <a href="https://discord.gg/voorbeeld" class="btn" target="_blank">Bekijk Server</a>
+      </div>
+      <div class="server-example fade-in">
+        <h4>Gaming Server</h4>
+        <p>Een server volledig ingericht voor gamers, met automatische meldingen en bots voor een geweldige ervaring.</p>
+        <a href="https://discord.gg/voorbeeld" class="btn" target="_blank">Bekijk Server</a>
+      </div>
+      <div class="server-example fade-in">
+        <h4>Zakelijke Server</h4>
+        <p>Een professionele server voor bedrijven, compleet met strikte beveiligingsinstellingen en klantcommunicatiekanalen.</p>
+        <a href="https://discord.gg/voorbeeld" class="btn" target="_blank">Bekijk Server</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PaasBunny.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      const menuButton = document.querySelector('.menu-toggle');
+      menu.classList.toggle('open');
+      menuButton.classList.toggle('hide');
+    }
+
+    window.onload = function() {
+      document.querySelectorAll('.server-example').forEach(function(box, index) {
+        box.style.animationDelay = `${index * 0.5}s`; // Voeg een vertraging van 0.5 seconden per servervoorbeeld toe
+        box.classList.add('fade-in-active');
+      });
+    };
+
+    // Fade-In effect voor server voorbeelden bij scrollen
+    document.addEventListener('scroll', function() {
+      const serverExamples = document.querySelectorAll('.server-example');
+      const scrollPosition = window.scrollY + window.innerHeight;
+
+      serverExamples.forEach(function(box) {
+        if (box.offsetTop < scrollPosition) {
+          box.classList.add('fade-in-active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

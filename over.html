@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaasBunny - Over</title>
+  <link rel="stylesheet" href="over.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="PaasBunny Logo" class="logo" />
+      <span class="logo-text">PaasBunny</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav-menu">
+      <div class="close-btn" onclick="toggleMenu()">X</div>
+      <ul>
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="over.html" onclick="toggleMenu()">Over</a></li>
+        <li><a href="discord.html" onclick="toggleMenu()">Discordbeheer</a></li>
+        <li><a href="bots.html" onclick="toggleMenu()">Bots</a></li>
+        <li><a href="login.html" class="login-btn" onclick="toggleMenu()">Inloggen</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="content">
+    <div class="intro">
+      <h2 class="intro-heading">Over PaasBunny</h2>
+      <p class="intro-text">PaasBunny is een gepassioneerde moderator en Discord-beheerder die werkt aan het verbeteren van de community-ervaring. Lees verder om meer te weten te komen over zijn rol en projecten.</p>
+    </div>
+
+    <div class="text-box fade-in left">
+      <h3>Wie is PaasBunny?</h3>
+      <p>PaasBunny is een ervaren Discord-beheerder en moderator die verantwoordelijk is voor verschillende servers. Met een passie voor het creëren van een leuke en veilige online omgeving, zorgt PaasBunny ervoor dat alles soepel verloopt, van het beheren van bots tot het begeleiden van gebruikers.</p>
+    </div>
+
+    <div class="text-box fade-in right">
+      <h3>Wat doet PaasBunny?</h3>
+      <p>Als moderator en Discord-beheerder helpt PaasBunny om servers te beheren, community’s te versterken en zorgen dat alles goed verloopt. Met behulp van krachtige bots worden gebruikerservaringen geautomatiseerd en geoptimaliseerd, zodat leden zich veilig en betrokken voelen.</p>
+    </div>
+
+    <div class="text-box fade-in left">
+      <h3>Waarom kiezen voor PaasBunny?</h3>
+      <p>Met een jarenlange ervaring in Discord-serverbeheer, de kennis van verschillende botsystemen, en een passie voor community management, biedt PaasBunny uitstekende ondersteuning voor jouw server. PaasBunny is altijd actief in de live streams, helpt bij het ondersteunen van communityleden, en draagt bij aan de organisatie van evenementen.</p>
+    </div>
+
+    <div class="text-box fade-in right">
+      <h3>Botbeheer</h3>
+      <p>PaasBunny beheert meerdere bots die automatisch taken uitvoeren, zoals berichtenbeheer, roltoewijzing, en serverbeveiliging. Dit maakt het eenvoudiger om een server te runnen zonder handmatige tussenkomst, zodat je tijd kunt besteden aan wat echt belangrijk is: de community!</p>
+    </div>
+
+    <div class="text-box fade-in last-text-box">
+      <h3>Slotopmerking</h3>
+      <p>PaasBunny blijft zich inzetten voor het verbeteren van de gebruikerservaringen op Discord en is altijd bereid om te helpen bij het creëren van een positieve sfeer in jouw community.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PaasBunny.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      const menuButton = document.querySelector('.menu-toggle');
+      menu.classList.toggle('open');
+      menuButton.classList.toggle('hide');
+    }
+
+    window.onload = function() {
+      document.querySelectorAll('.fade-in').forEach(function(box, index) {
+        box.style.animationDelay = `${index * 1}s`; // Voeg een vertraging van 1 seconde per tekstvak toe
+        box.classList.add('fade-in-active');
+      });
+    };
+
+    // Fade-In effect voor tekstvakken bij scrollen
+    document.addEventListener('scroll', function() {
+      const textBoxes = document.querySelectorAll('.text-box');
+      const scrollPosition = window.scrollY + window.innerHeight;
+
+      textBoxes.forEach(function(box) {
+        if (box.offsetTop < scrollPosition) {
+          box.classList.add('fade-in-active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
